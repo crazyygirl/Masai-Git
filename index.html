@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Ecommerce App</title>
+    <style>
+        nav{
+            display: flex;
+           
+            background-color: rgb(142, 0, 102);
+            color: white;
+        }
+        ul{
+            
+            display: flex;
+            flex-direction: row;
+            gap:100px;
+        }
+        a{
+            color: white;
+          text-decoration: none;
+        }
+        #catalogue{
+            display: grid;
+
+            /* grid-template-rows: repeat(4, 100px); */
+        }
+        #productCard{
+            height: 400px;
+            width: 30%;
+            border: 5px solid  rgb(142, 0, 102);
+            color:black
+        }
+        #productImg{
+            width: fit-content;
+            height:50%;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="menu">
+        <h1>Ecommerce App</h1>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="wishlist.html">wishlist</a></li>
+          <li><a href="cart.html">cart</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <button id="loading">Load Products</button>
+
+      </div>
+      <div id="catalogue">
+       <!-- <div id="productCard">
+
+       </div> -->
+      </div>
+      
+    
+</body>
+<script>
+    var LoadProducts = document.getElementById('loading');
+    // LoadProducts.addEventListener("click", function (e) {
+    //   event.preventDefault()
+    //     fetch('https://fakestoreapi.com/products')
+    //     .then(res=>res.json())
+    //         .then(json=>console.log(json))
+    // })
+    LoadProducts.addEventListener("click", (e) => {
+        fetch('https://fakestoreapi.com/products')
+        .then(res=>res.json())
+            .then(json=>json.forEach(element => {
+            // console.log(element.title)
+      
+            var catalogue = document.getElementById('catalogue');
+        
+          let productCard = document.createElement("div")
+          productCard.id='productCard'
+          let productImage = document.createElement("img")
+          productImage.setAttribute("id","productImg")
+          productImage.src=element.image
+          let productTitle= document.createElement("h3")
+
+          productTitle.textContent = element.title
+          let productPrice= document.createElement("h4")
+          productPrice.textContent = `price :${element.price}`
+          let productRating= document.createElement("h4")
+          productRating.textContent = element.description
+
+           var wishlist = document.createElement("button")
+            // wishlist.setAttribute("id" , "wishlistBtn")
+
+          catalogue.append(productCard) 
+          productCard.append(productImage)
+          productCard.append(productTitle)
+          productCard.append(productPrice)
+          productCard.append(productRating)
+          
+
+
+        }))
+          
+    });
+
+    </script>
+</html>
