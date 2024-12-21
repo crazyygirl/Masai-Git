@@ -23,18 +23,32 @@
         }
         #catalogue{
             display: grid;
-
-            /* grid-template-rows: repeat(4, 100px); */
+            gap: 15px;
+            grid-template-columns: repeat(4,375px);
         }
         #productCard{
-            height: 400px;
-            width: 30%;
+            height:max-content;
+            width: 80%;
             border: 5px solid  rgb(142, 0, 102);
             color:black
         }
         #productImg{
-            width: fit-content;
-            height:50%;
+            width: 80%;
+            height:40%;
+        }
+        #wishlistBtn{
+            width: 100px;
+            height: 30px;
+            color:purple;
+            margin: 10px;
+            
+        }
+        #cartBtn{
+            width: 100px;
+            height: 30px;
+            color:purple;
+            margin: 10px;
+            
         }
 
     </style>
@@ -63,12 +77,7 @@
 </body>
 <script>
     var LoadProducts = document.getElementById('loading');
-    // LoadProducts.addEventListener("click", function (e) {
-    //   event.preventDefault()
-    //     fetch('https://fakestoreapi.com/products')
-    //     .then(res=>res.json())
-    //         .then(json=>console.log(json))
-    // })
+   
     LoadProducts.addEventListener("click", (e) => {
         fetch('https://fakestoreapi.com/products')
         .then(res=>res.json())
@@ -91,19 +100,39 @@
           productRating.textContent = element.description
 
            var wishlist = document.createElement("button")
-            // wishlist.setAttribute("id" , "wishlistBtn")
+           wishlist.setAttribute("id" ,"wishlistBtn")
+
+           wishlist.textContent = 'Wishlist'
+
+           var cartItem = document.createElement("button")
+           cartItem.setAttribute("id" ,"cartBtn")
+           cartItem.setAttribute("onclick" ,"wishlistHandling()")
+
+           cartItem.textContent = 'Add To Cart'
+
 
           catalogue.append(productCard) 
           productCard.append(productImage)
           productCard.append(productTitle)
           productCard.append(productPrice)
           productCard.append(productRating)
-          
+          productCard.append(wishlist,cartItem)
+
 
 
         }))
+
+        // var wishlistBtn = document.getElementById('wishlistBtn');
+
+       
+        // function wishlistHandling(){
+        //     localStorage.setItem("wishlistedProducts" ,element)
+
+        // }
           
     });
+
+
 
     </script>
 </html>
